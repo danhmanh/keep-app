@@ -4,37 +4,47 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 export default class LoginForm extends Component {
-  state = {
-    email: '',
-    password: '',
-    loggedIn: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      loggedIn: false,
+    }
   }
 
-  login = () => {
-    axios
-      .post('/api/v1/users/login', {
-        user: {
-          email: this.state.email,
-          password: this.state.password,
-        },
-      })
-      .then((response) => {
-        this.setState({ loggedIn: true })
-        alert('Login Sucess')
-        console.log(response.data)
-      })
-      .catch((error) => {
-        if (error.response) {
-          if (error.response.status === 401) {
-            alert('Wrong email or password')
-          }
-        }
 
-        console.log(error)
-      })
+  login = () => {
+    // axios
+    //   .post('/api/v1/users/login', {
+    //     user: {
+    //       email: this.state.email,
+    //       password: this.state.password,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     this.setState({ loggedIn: true })
+    //     alert('Login Sucess')
+    //     console.log(response.data)
+    //   })
+    //   .catch((error) => {
+    //     if (error.response) {
+    //       if (error.response.status === 401) {
+    //         alert('Wrong email or password')
+    //       }
+    //     }
+
+    //     console.log(error)
+    //   })
+    console.log('email in log in form', this.state.email)
+    this.setState({ loggedIn: true })
+    this.props.data(this.state.email);
+    console.log(this.props);
+    return;
   }
 
   handleEmailChange = (event) => {
+
     this.setState({ email: event.target.value })
   }
 
@@ -54,7 +64,6 @@ export default class LoginForm extends Component {
               <Form.Group controlId='formBasicEmail'>
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
-                  type='email'
                   placeholder='Enter email'
                   onChange={this.handleEmailChange}
                 />

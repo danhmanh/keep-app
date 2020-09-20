@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Navbar } from 'react-bootstrap'
 
 export default class NavigationBar extends Component {
-  render() {
+  render(props) {
+    console.log('prop in navigation bar', props);
     return (
       <div>
         <Navbar>
@@ -14,7 +15,6 @@ export default class NavigationBar extends Component {
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>
-
         <hr></hr>
       </div>
     )
